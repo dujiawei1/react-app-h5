@@ -18,6 +18,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     // 规则
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   }
 };
