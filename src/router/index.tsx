@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
-import TestFn from '@/pages/test';
 import LoginPage from '@/pages/loginPage/LoginPage';
+import Home from '@/pages/home/index';
 
+const TestFn = lazy(() => import('@/pages/test'));
 const routes: RouteObject[] = [
   {
     path: '/test',
     element: <TestFn />
   },
   {
-    // path: '/login',
-    // element: <LoginPage name="Jany" age={12} />
+    path: '/home',
+    element: <Home />
   }
 ];
 

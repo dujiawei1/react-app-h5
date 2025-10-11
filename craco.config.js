@@ -6,7 +6,7 @@ const resolve = (dir) => path.resolve(__dirname, dir);
 module.exports = {
   plugins: [
     {
-      plugin: CracoLessPlugin,
+      plugin: CracoLessPlugin
       /* options: {
         lessLoaderOptions: {
           lessOptions: {
