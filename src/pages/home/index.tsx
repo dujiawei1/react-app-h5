@@ -1,27 +1,31 @@
 import React from 'react';
 import type { FC } from 'react';
 import { TabBar } from 'antd-mobile';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { AppOutline, UserOutline } from 'antd-mobile-icons';
 import { AppWrapper } from './style';
-import TestFn from '@/pages/test';
 
 const Bottom: FC = () => {
+  const navigate = useNavigate();
   const tabs = [
     {
-      key: '/home',
+      key: '/clinicPage',
       title: '医馆',
       icon: <AppOutline />
     },
     {
-      key: '/me',
+      key: '/myPage',
       title: '我的',
       icon: <UserOutline />
     }
   ];
 
+  const setRouteActive = (value: string) => {
+    navigate(value);
+  };
+
   return (
-    <TabBar>
+    <TabBar onChange={(value) => setRouteActive(value)}>
       {tabs.map((item) => (
         <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
       ))}
@@ -33,10 +37,7 @@ const Home: FC = () => {
   return (
     <AppWrapper>
       <div className="content">
-        {/* <Routes>
-          <Route path="/test" element={<TestFn />}></Route>
-        </Routes>
-        <Outlet></Outlet> */}
+        <Outlet></Outlet>
       </div>
       <div className="bottom">
         <Bottom />

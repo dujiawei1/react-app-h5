@@ -5,4 +5,8 @@ function getExpertAdvice(params: any) {
   return request.get('/health/expertAdvice/list', params);
 }
 
-export { getExpertAdvice };
+// 请求医馆列表
+function getClinicList(params: any) {
+  return request.get('/clinic/list', params).then((res) => res.rows);
+}
+export { getExpertAdvice, getClinicList };

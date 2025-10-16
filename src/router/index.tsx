@@ -1,17 +1,24 @@
 import React, { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import LoginPage from '@/pages/loginPage/LoginPage';
-import Home from '@/pages/home/index';
+import Home from '@/pages/home';
+import ClinicPage from '@/pages/clinicPage/ClinicPage';
+import MyPage from '@/pages/myPage/MyPage';
 
-const TestFn = lazy(() => import('@/pages/test'));
 const routes: RouteObject[] = [
   {
-    path: '/test',
-    element: <TestFn />
-  },
-  {
-    path: '/home',
-    element: <Home />
+    path: '/',
+    element: <Home />,
+    children: [
+      {
+        path: 'clinicPage',
+        element: <ClinicPage />
+      },
+      {
+        path: 'myPage',
+        element: <MyPage />
+      }
+    ]
   }
 ];
 
