@@ -1,17 +1,19 @@
 import React from 'react';
-import { List } from 'antd-mobile';
-import { RightOutline } from 'antd-mobile-icons';
-import { ClinicListBox, ClinicItemBox } from './style/index';
+import { ClinicListBox, ClinicItemBox } from './style';
 import { ClinicItem } from './types/clinicPage';
+import { useAppSelector, shallowEqualApp } from '@/store';
 
-interface ClinicListProps {
-  clinicList: ClinicItem[];
-}
+const ClinicList: React.FC = () => {
+  const { clinicList } = useAppSelector(
+    (state) => ({
+      clinicList: state.clinic.clinicList
+    }),
+    shallowEqualApp
+  );
 
-const ClinicList: React.FC<ClinicListProps> = ({ clinicList }) => {
   return (
     <ClinicListBox>
-      {clinicList.map((item) => (
+      {clinicList.map((item: ClinicItem) => (
         <ClinicItemBox key={item.clinicId}>
           <img src={item.avatar} alt="" />
           <div className="clinic-info">

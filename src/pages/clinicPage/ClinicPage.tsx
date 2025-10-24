@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Input } from 'antd-mobile';
 import { SearchOutline } from 'antd-mobile-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { ClinicPageBox, SearchBox, NoticeBox } from './style/index';
+import { ClinicPageBox, SearchBox, NoticeBox } from './style';
 import noticeImg from '@/assets/img/noticeImg.png';
 import ClinicList from './ClinicList';
-import { getClinicList } from '@/service/modules/common';
-import { ClinicItem } from './types/clinicPage';
-import { setClinicList } from '@/store/modules/clinicStore';
+import { fetchClinicList } from '@/store/modules/clinicStore';
+import { useAppDispatch } from '@/store';
 
 const ClinicPage: React.FC = () => {
   const [inputValue, setValue] = useState('');
-  const [clinicList, setClinicList] = useState<ClinicItem[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getClinicList({
-      pageNum: 1,
-      pageSize: 10,
-      longitude: null,
-      latitude: null,
-      orderByColumn: 'distance',
-      isAsc: 'asc'
-    }).then((res) => {
-      setClinicList(res);
-    });
+    dispatch(fetchClinicList());
   }, []);
 
   return (
@@ -50,10 +38,10 @@ const ClinicPage: React.FC = () => {
       </NoticeBox>
       {/* 列表 */}
       <div style={{ flex: 1, minHeight: 0 }}>
-        <ClinicList clinicList={clinicList}></ClinicList>
+        <ClinicList></ClinicList>
       </div>
     </ClinicPageBox>
   );
 };
 
-export default ClinicPage;
+export default memo(ClinicPage);

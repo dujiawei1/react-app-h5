@@ -19,6 +19,10 @@ const routes: RouteObject[] = [
         element: <MyPage />
       }
     ]
+  },
+  {
+    path: '/loginPage',
+    element: <LoginPage />
   }
 ];
 

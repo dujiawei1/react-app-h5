@@ -21,6 +21,12 @@ const Bottom: FC = () => {
   ];
 
   const setRouteActive = (value: string) => {
+    if (value === '/myPage') {
+      if (!localStorage.getItem('token')) {
+        navigate('/loginPage');
+        return;
+      }
+    }
     navigate(value);
   };
 
