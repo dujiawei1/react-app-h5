@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, memo } from 'react';
 
-function clinicPage() {
+function MyPage() {
+  useEffect(() => {
+    console.log('首次渲染');
+  }, []);
   return <div className="">我的</div>;
 }
 
-export default clinicPage;
+export default memo(MyPage);

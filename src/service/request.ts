@@ -47,13 +47,13 @@ request.interceptors.response.use(
     }
 
     if (response.data.code === 500) {
-      Toast.show({ content: response.data.msg, icon: 'fail' });
+      Toast.show({ content: response.data.msg });
       return Promise.reject(new Error(response.data.msg));
     }
 
     if (response.data.code !== 200) {
       console.error('status不为200（错误信息）：', response.data.msg);
-      Toast.show({ content: response.data.msg, icon: 'fail' });
+      Toast.show({ content: response.data.msg });
       return Promise.reject(response);
     } else {
       return response.data;

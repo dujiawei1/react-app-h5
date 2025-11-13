@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ClinicListBox, ClinicItemBox } from './style';
 import { ClinicItem } from './types/clinicPage';
 import { useAppSelector, shallowEqualApp } from '@/store';
@@ -29,4 +29,4 @@ const ClinicList: React.FC = () => {
   );
 };
 
-export default ClinicList;
+export default memo(ClinicList);

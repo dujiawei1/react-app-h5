@@ -1,9 +1,15 @@
 import React, { memo, useState } from 'react';
 import { Input, Button, Checkbox } from 'antd-mobile';
+import { useNavigate } from 'react-router-dom';
 import { LoginPageBox, LoginBox, AgressBox } from './style';
+import { loginRequest } from '@/service/modules/common';
+
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
   const cdnBaseUrl = 'https://cdn.kangzhisu.com/kzs/mp-weixin';
   const [checkValue, setCheckValue] = useState<boolean>(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [smsCode, setSmsCode] = useState('');
 
   const getVerificationCode = () => {
     console.log('获取验证码');
@@ -13,6 +19,16 @@ const LoginPage: React.FC = () => {
     if (!checkValue) {
       return;
     }
+    // 登录接口
+    loginRequest({
+      phonenumber: phoneNumber,
+      smsCode: smsCode
+    }).then((res) => {
+      if (res.code === 200) {
+        localStorage.setItem('token', res.data.token);
+        navigate('/clinicPage');
+      }
+    });
   };
   return (
     <LoginPageBox>
@@ -23,7 +39,11 @@ const LoginPage: React.FC = () => {
             <img src={`${cdnBaseUrl}/images/loginPage/phoneIcon.png`} alt="" />
             <span>手机号</span>
           </div>
-          <Input placeholder="请输入手机号" />
+          <Input
+            placeholder="请输入手机号"
+            value={phoneNumber}
+            onChange={(val) => setPhoneNumber(val)}
+          />
         </div>
         {/* 验证码 */}
         <div style={{ marginBottom: '40px' }}>
@@ -32,7 +52,11 @@ const LoginPage: React.FC = () => {
             <span>验证码</span>
           </div>
           <div className="input-box">
-            <Input placeholder="请输入短信验证码" />
+            <Input
+              placeholder="请输入短信验证码"
+              value={smsCode}
+              onChange={(val) => setSmsCode(val)}
+            />
             <span className="code-right" onClick={getVerificationCode}>
               获取验证码
             </span>

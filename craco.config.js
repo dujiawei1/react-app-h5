@@ -17,6 +17,11 @@ module.exports = {
       } */
     }
   ],
+  devServer: {
+    client: {
+      overlay: false // 编译错误时取消全屏覆盖
+    }
+  },
   webpack: {
     alias: {
       '@': resolve('src')
